@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide-static@latest/lucide.js"></script>
+    <title>FoodVault - Settings</title>
+  </head>
+
+  <body
+    class="bg-gray-100 flex items-center justify-center h-screen overflow-hidden"
+  >
+    <div class="flex gap-6">
+      <!-- Phone Frame -->
+      <div
+        class="w-[360px] h-[720px] bg-white rounded-[40px] shadow-xl p-5 flex flex-col overflow-hidden"
+      >
+        <!-- Header -->
+        <div class="flex items-center justify-between mb-3">
+          <div>
+            <h1 class="text-lg font-semibold">设置</h1>
+            <p class="text-xs text-gray-400">个性化你的美食系统</p>
+          </div>
+          <img
+            src="https://unpkg.com/lucide-static@latest/icons/settings.svg"
+            class="w-6 h-6"
+          />
+        </div>
+
+        <!-- AI Preference -->
+        <div class="bg-black text-white rounded-2xl p-4 mb-3">
+          <div class="flex items-center gap-2 mb-1">
+            <img
+              src="https://unpkg.com/lucide-static@latest/icons/sparkles.svg"
+              class="w-4 h-4"
+            />
+            <span class="text-sm font-medium">AI 偏好模式</span>
+          </div>
+          <p class="text-xs text-gray-300">
+            当前：均衡推荐（口味 + 距离 + 评分）
+          </p>
+
+          <button
+            class="mt-3 text-xs bg-white text-black px-3 py-1 rounded-full"
+          >
+            调整模型
+          </button>
+        </div>
+
+        <!-- Preference Controls -->
+        <div class="space-y-3 mb-3">
+          <div class="bg-gray-50 rounded-2xl p-3">
+            <div class="flex justify-between items-center mb-1">
+              <p class="text-xs font-medium">口味偏好权重</p>
+              <span class="text-xs text-gray-400">70%</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2">
+              <div class="bg-black h-2 rounded-full" style="width: 70%"></div>
+            </div>
+          </div>
+
+          <div class="bg-gray-50 rounded-2xl p-3">
+            <div class="flex justify-between items-center mb-1">
+              <p class="text-xs font-medium">距离优先级</p>
+              <span class="text-xs text-gray-400">40%</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2">
+              <div
+                class="bg-gray-600 h-2 rounded-full"
+                style="width: 40%"
+              ></div>
+            </div>
+          </div>
+
+          <div class="bg-gray-50 rounded-2xl p-3">
+            <div class="flex justify-between items-center mb-1">
+              <p class="text-xs font-medium">评分权重</p>
+              <span class="text-xs text-gray-400">85%</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2">
+              <div class="bg-black h-2 rounded-full" style="width: 85%"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Toggles -->
+        <div class="space-y-2 mb-3">
+          <div
+            class="bg-gray-50 rounded-xl p-3 flex justify-between items-center"
+          >
+            <p class="text-xs">启用 AI 推荐</p>
+            <div class="w-10 h-5 bg-black rounded-full"></div>
+          </div>
+
+          <div
+            class="bg-gray-50 rounded-xl p-3 flex justify-between items-center"
+          >
+            <p class="text-xs">记录自动分类</p>
+            <div class="w-10 h-5 bg-gray-300 rounded-full"></div>
+          </div>
+
+          <div
+            class="bg-gray-50 rounded-xl p-3 flex justify-between items-center"
+          >
+            <p class="text-xs">位置自动识别</p>
+            <div class="w-10 h-5 bg-black rounded-full"></div>
+          </div>
+        </div>
+
+        <!-- Data Section -->
+        <div class="bg-gray-50 rounded-2xl p-3 mb-3">
+          <p class="text-xs font-medium mb-2">数据管理</p>
+
+          <div class="space-y-2">
+            <button class="w-full bg-white p-2 rounded-xl text-xs text-left">
+              导出我的美食数据
+            </button>
+
+            <button class="w-full bg-white p-2 rounded-xl text-xs text-left">
+              清理缓存数据
+            </button>
+
+            <button
+              class="w-full bg-red-50 text-red-500 p-2 rounded-xl text-xs text-left"
+            >
+              删除所有记录
+            </button>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <p class="text-center text-xs text-gray-400 mt-auto">
+          FoodVault v1.0 · Personal Food Memory System
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide-static@latest/lucide.js"></script>
+    <title>FoodVault - Store Detail</title>
+  </head>
+
+  <body
+    class="bg-gray-100 flex items-center justify-center h-screen overflow-hidden"
+  >
+    <div class="flex gap-6">
+      <!-- Phone Frame -->
+      <div
+        class="w-[360px] h-[720px] bg-white rounded-[40px] shadow-xl p-5 flex flex-col overflow-hidden"
+      >
+        <!-- Header -->
+        <div class="flex items-center justify-between mb-3">
+          <div>
+            <h1 class="text-lg font-semibold">海底捞</h1>
+            <p class="text-xs text-gray-400">火锅 · 上海</p>
+          </div>
+          <img
+            src="https://unpkg.com/lucide-static@latest/icons/more-horizontal.svg"
+            class="w-6 h-6"
+          />
+        </div>
+
+        <!-- Rating Overview -->
+        <div class="bg-black text-white rounded-2xl p-4 mb-3">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-xs text-gray-300">综合评分</p>
+              <p class="text-2xl font-semibold">4.8</p>
+            </div>
+            <img
+              src="https://unpkg.com/lucide-static@latest/icons/star.svg"
+              class="w-8 h-8"
+            />
+          </div>
+          <p class="text-xs text-gray-300 mt-2">基于你的 3 次记录</p>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="grid grid-cols-3 gap-2 mb-3">
+          <button class="bg-green-50 text-green-600 py-2 rounded-xl text-xs">
+            ✔ 再吃一次
+          </button>
+
+          <button class="bg-gray-100 py-2 rounded-xl text-xs">
+            ⭐ 更新评分
+          </button>
+
+          <button class="bg-red-50 text-red-500 py-2 rounded-xl text-xs">
+            ✖ 标记踩雷
+          </button>
+        </div>
+
+        <!-- Info Cards -->
+        <div class="space-y-2 mb-3">
+          <div class="bg-gray-50 rounded-xl p-3">
+            <p class="text-xs text-gray-400">人均消费</p>
+            <p class="text-sm font-medium">120 元</p>
+          </div>
+
+          <div class="bg-gray-50 rounded-xl p-3">
+            <p class="text-xs text-gray-400">最近一次访问</p>
+            <p class="text-sm font-medium">2026-05-20</p>
+          </div>
+
+          <div class="bg-gray-50 rounded-xl p-3">
+            <p class="text-xs text-gray-400">标签</p>
+            <div class="flex gap-2 mt-1 flex-wrap">
+              <span class="text-xs bg-gray-200 px-2 py-1 rounded-full"
+                >聚餐</span
+              >
+              <span class="text-xs bg-gray-200 px-2 py-1 rounded-full"
+                >热门</span
+              >
+              <span class="text-xs bg-gray-200 px-2 py-1 rounded-full"
+                >服务好</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- Notes -->
+        <div class="bg-gray-50 rounded-xl p-3 mb-3 flex-1 overflow-hidden">
+          <p class="text-xs text-gray-400 mb-1">个人备注</p>
+          <p class="text-sm text-gray-600">
+            适合多人聚餐，排队较长，但服务体验很好，推荐番茄锅。
+          </p>
+        </div>
+
+        <!-- Bottom CTA -->
+        <button class="bg-black text-white py-3 rounded-2xl text-sm">
+          记录一次消费
+        </button>
+      </div>
+    </div>
+  </body>
+</html>

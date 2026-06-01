@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide-static@latest/lucide.js"></script>
+    <title>FoodVault - AI Decide</title>
+  </head>
+
+  <body
+    class="bg-gray-100 flex items-center justify-center h-screen overflow-hidden"
+  >
+    <div class="flex gap-6">
+      <!-- Phone Frame -->
+      <div
+        class="w-[360px] h-[720px] bg-white rounded-[40px] shadow-xl p-5 flex flex-col overflow-hidden"
+      >
+        <!-- Header -->
+        <div class="flex items-center justify-between mb-3">
+          <div>
+            <h1 class="text-lg font-semibold">AI 帮你决定</h1>
+            <p class="text-xs text-gray-400">今天吃什么？交给系统</p>
+          </div>
+          <img
+            src="https://unpkg.com/lucide-static@latest/icons/zap.svg"
+            class="w-6 h-6"
+          />
+        </div>
+
+        <!-- Main Decision Card -->
+        <div class="bg-black text-white rounded-2xl p-5 mb-4 text-center">
+          <p class="text-xs text-gray-300 mb-2">推荐结果</p>
+
+          <h2 class="text-2xl font-semibold mb-1">海底捞</h2>
+          <p class="text-sm text-gray-300">火锅 · 距离 0.8km</p>
+
+          <div class="mt-3 flex justify-center gap-2">
+            <span class="text-xs bg-white text-black px-2 py-1 rounded-full"
+              >评分 4.8</span
+            >
+            <span class="text-xs bg-gray-700 px-2 py-1 rounded-full"
+              >你喜欢火锅</span
+            >
+          </div>
+        </div>
+
+        <!-- Reason -->
+        <div class="bg-gray-50 rounded-2xl p-3 mb-3">
+          <div class="flex items-center gap-2 mb-1">
+            <img
+              src="https://unpkg.com/lucide-static@latest/icons/sparkles.svg"
+              class="w-4 h-4"
+            />
+            <span class="text-xs font-medium">AI 推荐理由</span>
+          </div>
+          <p class="text-xs text-gray-500">
+            基于你最近 7 天记录：火锅占比 62%，且该店评分最高 + 距离最近
+          </p>
+        </div>
+
+        <!-- Actions -->
+        <div class="grid grid-cols-2 gap-2 mb-3">
+          <button class="bg-black text-white py-3 rounded-2xl text-sm">
+            就吃这个
+          </button>
+
+          <button class="bg-gray-100 py-3 rounded-2xl text-sm">换一个</button>
+        </div>
+
+        <!-- Alternatives -->
+        <div class="flex-1 overflow-hidden">
+          <p class="text-xs text-gray-400 mb-2">备选推荐</p>
+
+          <div class="space-y-2">
+            <div
+              class="bg-gray-50 rounded-xl p-3 flex justify-between items-center"
+            >
+              <div>
+                <p class="text-sm font-medium">小龙坎</p>
+                <p class="text-xs text-gray-400">火锅 · 评分 4.5</p>
+              </div>
+              <span class="text-xs bg-gray-200 px-2 py-1 rounded-full"
+                >次选</span
+              >
+            </div>
+
+            <div
+              class="bg-gray-50 rounded-xl p-3 flex justify-between items-center"
+            >
+              <div>
+                <p class="text-sm font-medium">喜茶</p>
+                <p class="text-xs text-gray-400">饮品 · 评分 4.3</p>
+              </div>
+              <span class="text-xs bg-gray-200 px-2 py-1 rounded-full"
+                >轻食</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

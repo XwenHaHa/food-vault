@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide-static@latest/lucide.js"></script>
+    <title>FoodVault - Search</title>
+  </head>
+
+  <body
+    class="bg-gray-100 flex items-center justify-center h-screen overflow-hidden"
+  >
+    <div class="flex gap-6">
+      <!-- Phone Frame -->
+      <div
+        class="w-[360px] h-[720px] bg-white rounded-[40px] shadow-xl p-5 flex flex-col overflow-hidden"
+      >
+        <!-- Header -->
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h1 class="text-lg font-semibold">搜索</h1>
+            <p class="text-xs text-gray-400">3 秒找到想吃的</p>
+          </div>
+          <img
+            src="https://unpkg.com/lucide-static@latest/icons/search.svg"
+            class="w-6 h-6"
+          />
+        </div>
+
+        <!-- Search Input -->
+        <div class="bg-gray-50 rounded-2xl p-3 flex items-center gap-2 mb-3">
+          <img
+            src="https://unpkg.com/lucide-static@latest/icons/search.svg"
+            class="w-4 h-4 text-gray-400"
+          />
+          <input
+            class="w-full bg-transparent text-sm outline-none"
+            placeholder="搜索店名 / 火锅 / 上海 / 咖啡..."
+          />
+        </div>
+
+        <!-- Filters -->
+        <div class="space-y-3 mb-3">
+          <!-- Status Filter -->
+          <div>
+            <p class="text-xs text-gray-400 mb-1">状态</p>
+            <div class="flex gap-2">
+              <button
+                class="bg-black text-white px-3 py-1 rounded-full text-xs"
+              >
+                全部
+              </button>
+              <button class="bg-gray-100 px-3 py-1 rounded-full text-xs">
+                已吃
+              </button>
+              <button class="bg-gray-100 px-3 py-1 rounded-full text-xs">
+                待吃
+              </button>
+            </div>
+          </div>
+
+          <!-- Category Filter -->
+          <div>
+            <p class="text-xs text-gray-400 mb-1">分类</p>
+            <div class="grid grid-cols-4 gap-2">
+              <button class="bg-gray-100 py-1 rounded-xl text-xs">火锅</button>
+              <button class="bg-gray-100 py-1 rounded-xl text-xs">烧烤</button>
+              <button class="bg-gray-100 py-1 rounded-xl text-xs">咖啡</button>
+              <button class="bg-gray-100 py-1 rounded-xl text-xs">日料</button>
+            </div>
+          </div>
+
+          <!-- City Filter -->
+          <div>
+            <p class="text-xs text-gray-400 mb-1">城市</p>
+            <div class="flex gap-2 flex-wrap">
+              <button class="bg-gray-100 px-3 py-1 rounded-full text-xs">
+                上海
+              </button>
+              <button class="bg-gray-100 px-3 py-1 rounded-full text-xs">
+                北京
+              </button>
+              <button class="bg-gray-100 px-3 py-1 rounded-full text-xs">
+                深圳
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Result List -->
+        <div class="flex-1 overflow-hidden">
+          <p class="text-xs text-gray-400 mb-2">搜索结果</p>
+
+          <div class="space-y-2">
+            <div
+              class="bg-gray-50 rounded-xl p-3 flex justify-between items-center"
+            >
+              <div>
+                <p class="text-sm font-medium">海底捞</p>
+                <p class="text-xs text-gray-400">火锅 · 上海 · 已吃</p>
+              </div>
+              <span
+                class="text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full"
+                >4.8</span
+              >
+            </div>
+
+            <div
+              class="bg-gray-50 rounded-xl p-3 flex justify-between items-center"
+            >
+              <div>
+                <p class="text-sm font-medium">喜茶</p>
+                <p class="text-xs text-gray-400">饮品 · 深圳 · 待吃</p>
+              </div>
+              <span
+                class="text-xs bg-yellow-100 text-yellow-600 px-2 py-1 rounded-full"
+                >4.3</span
+              >
+            </div>
+
+            <div
+              class="bg-gray-50 rounded-xl p-3 flex justify-between items-center"
+            >
+              <div>
+                <p class="text-sm font-medium">奈雪的茶</p>
+                <p class="text-xs text-gray-400">饮品 · 北京 · 已吃</p>
+              </div>
+              <span
+                class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full"
+                >4.0</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

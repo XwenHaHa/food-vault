@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide-static@latest/lucide.js"></script>
+    <title>FoodVault Dashboard</title>
+  </head>
+
+  <body
+    class="bg-gray-100 flex items-center justify-center h-screen overflow-hidden"
+  >
+    <div class="flex gap-6">
+      <!-- Phone Frame -->
+      <div
+        class="w-[360px] h-[720px] bg-white rounded-[40px] shadow-xl p-5 flex flex-col overflow-hidden"
+      >
+        <!-- Header -->
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h1 class="text-lg font-semibold">FoodVault</h1>
+            <p class="text-xs text-gray-400">你的私人美食库</p>
+          </div>
+          <img
+            src="https://unpkg.com/lucide-static@latest/icons/user.svg"
+            class="w-6 h-6"
+          />
+        </div>
+
+        <!-- AI Recommend Card -->
+        <div class="bg-black text-white rounded-2xl p-4 mb-4">
+          <div class="flex items-center gap-2 mb-2">
+            <img
+              src="https://unpkg.com/lucide-static@latest/icons/sparkles.svg"
+              class="w-4 h-4"
+            />
+            <span class="text-sm font-medium">AI 今日推荐</span>
+          </div>
+          <p class="text-sm text-gray-200">
+            你最近偏爱火锅，附近有一家评分 4.8 的店值得尝试
+          </p>
+          <button
+            class="mt-3 text-xs bg-white text-black px-3 py-1 rounded-full"
+          >
+            去看看
+          </button>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-3 gap-2 mb-4">
+          <div class="bg-gray-50 rounded-xl p-3 text-center">
+            <p class="text-lg font-semibold">128</p>
+            <p class="text-xs text-gray-400">收藏</p>
+          </div>
+          <div class="bg-gray-50 rounded-xl p-3 text-center">
+            <p class="text-lg font-semibold">86</p>
+            <p class="text-xs text-gray-400">已吃</p>
+          </div>
+          <div class="bg-gray-50 rounded-xl p-3 text-center">
+            <p class="text-lg font-semibold">42</p>
+            <p class="text-xs text-gray-400">待吃</p>
+          </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="flex gap-2 mb-4">
+          <button class="flex-1 bg-black text-white py-2 rounded-xl text-sm">
+            + 添加店铺
+          </button>
+          <button class="flex-1 bg-gray-100 py-2 rounded-xl text-sm">
+            🔍 搜索
+          </button>
+        </div>
+
+        <!-- Recent List -->
+        <div class="flex-1 overflow-hidden">
+          <h2 class="text-sm font-semibold mb-2">最近新增</h2>
+
+          <div class="space-y-2">
+            <div
+              class="bg-gray-50 rounded-xl p-3 flex justify-between items-center"
+            >
+              <div>
+                <p class="text-sm font-medium">海底捞</p>
+                <p class="text-xs text-gray-400">火锅 · 上海</p>
+              </div>
+              <span
+                class="text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full"
+                >4.5</span
+              >
+            </div>
+
+            <div
+              class="bg-gray-50 rounded-xl p-3 flex justify-between items-center"
+            >
+              <div>
+                <p class="text-sm font-medium">喜茶</p>
+                <p class="text-xs text-gray-400">饮品 · 外卖</p>
+              </div>
+              <span
+                class="text-xs bg-yellow-100 text-yellow-600 px-2 py-1 rounded-full"
+                >4.2</span
+              >
+            </div>
+
+            <div
+              class="bg-gray-50 rounded-xl p-3 flex justify-between items-center"
+            >
+              <div>
+                <p class="text-sm font-medium">兰州拉面</p>
+                <p class="text-xs text-gray-400">小吃 · 北京</p>
+              </div>
+              <span
+                class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full"
+                >3.8</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Nav -->
+        <div class="flex justify-between mt-4 pt-3 border-t">
+          <img
+            src="https://unpkg.com/lucide-static@latest/icons/home.svg"
+            class="w-5 h-5"
+          />
+          <img
+            src="https://unpkg.com/lucide-static@latest/icons/search.svg"
+            class="w-5 h-5"
+          />
+          <img
+            src="https://unpkg.com/lucide-static@latest/icons/map-pin.svg"
+            class="w-5 h-5"
+          />
+          <img
+            src="https://unpkg.com/lucide-static@latest/icons/settings.svg"
+            class="w-5 h-5"
+          />
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

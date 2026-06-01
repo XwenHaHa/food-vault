@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide-static@latest/lucide.js"></script>
+    <title>FoodVault - Nearby</title>
+  </head>
+
+  <body
+    class="bg-gray-100 flex items-center justify-center h-screen overflow-hidden"
+  >
+    <div class="flex gap-6">
+      <!-- Phone Frame -->
+      <div
+        class="w-[360px] h-[720px] bg-white rounded-[40px] shadow-xl p-5 flex flex-col overflow-hidden"
+      >
+        <!-- Header -->
+        <div class="flex items-center justify-between mb-3">
+          <div>
+            <h1 class="text-lg font-semibold">附近推荐</h1>
+            <p class="text-xs text-gray-400">基于你的收藏 & 当前位置</p>
+          </div>
+          <img
+            src="https://unpkg.com/lucide-static@latest/icons/map-pin.svg"
+            class="w-6 h-6"
+          />
+        </div>
+
+        <!-- AI Summary -->
+        <div class="bg-black text-white rounded-2xl p-4 mb-3">
+          <div class="flex items-center gap-2 mb-1">
+            <img
+              src="https://unpkg.com/lucide-static@latest/icons/sparkles.svg"
+              class="w-4 h-4"
+            />
+            <span class="text-sm font-medium">AI 推荐结论</span>
+          </div>
+          <p class="text-sm text-gray-200">
+            你当前位置 1km 内有 3 家你收藏过的店，其中海底捞评分最高。
+          </p>
+        </div>
+
+        <!-- Map Placeholder -->
+        <div
+          class="bg-gray-200 rounded-2xl h-40 mb-3 flex items-center justify-center"
+        >
+          <img
+            src="https://unpkg.com/lucide-static@latest/icons/map.svg"
+            class="w-10 h-10 text-gray-500"
+          />
+        </div>
+
+        <!-- Quick Filter -->
+        <div class="flex gap-2 mb-3">
+          <button class="bg-black text-white px-3 py-1 rounded-full text-xs">
+            全部
+          </button>
+          <button class="bg-gray-100 px-3 py-1 rounded-full text-xs">
+            1km
+          </button>
+          <button class="bg-gray-100 px-3 py-1 rounded-full text-xs">
+            火锅
+          </button>
+          <button class="bg-gray-100 px-3 py-1 rounded-full text-xs">
+            高评分
+          </button>
+        </div>
+
+        <!-- List -->
+        <div class="flex-1 overflow-hidden space-y-2">
+          <!-- Card 1 -->
+          <div
+            class="bg-gray-50 rounded-xl p-3 flex justify-between items-center"
+          >
+            <div>
+              <p class="text-sm font-medium">海底捞</p>
+              <p class="text-xs text-gray-400">0.8km · 火锅 · 评分 4.8</p>
+            </div>
+            <button class="text-xs bg-black text-white px-3 py-1 rounded-full">
+              去吃
+            </button>
+          </div>
+
+          <!-- Card 2 -->
+          <div
+            class="bg-gray-50 rounded-xl p-3 flex justify-between items-center"
+          >
+            <div>
+              <p class="text-sm font-medium">小龙坎</p>
+              <p class="text-xs text-gray-400">1.2km · 火锅 · 评分 4.5</p>
+            </div>
+            <button class="text-xs bg-gray-100 px-3 py-1 rounded-full">
+              查看
+            </button>
+          </div>
+
+          <!-- Card 3 -->
+          <div
+            class="bg-gray-50 rounded-xl p-3 flex justify-between items-center"
+          >
+            <div>
+              <p class="text-sm font-medium">喜茶</p>
+              <p class="text-xs text-gray-400">0.5km · 饮品 · 评分 4.3</p>
+            </div>
+            <button class="text-xs bg-gray-100 px-3 py-1 rounded-full">
+              查看
+            </button>
+          </div>
+        </div>
+
+        <!-- Bottom CTA -->
+        <button class="bg-black text-white py-3 rounded-2xl text-sm mt-3">
+          AI 帮我选一个
+        </button>
+      </div>
+    </div>
+  </body>
+</html>
