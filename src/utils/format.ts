@@ -16,8 +16,8 @@ export function formatCost(cost: number): string {
   return `${cost} 元`;
 }
 
-export function formatRating(rating: number): string {
-  return rating.toFixed(1);
+export function formatRating(rating?: number | null): string {
+  return rating?.toFixed(1) ?? '-';
 }
 
 export function getRatingColor(rating: number): string {

@@ -18,7 +18,7 @@ export function StoreCard({ store }: StoreCardProps) {
             {store.source && ` · ${SOURCE_LABELS[store.source]}`}
           </p>
         </div>
-        {store.rating !== undefined && <RatingBadge rating={store.rating} />}
+        {store.rating != null && <RatingBadge rating={store.rating} />}
       </div>
     </Link>
   );

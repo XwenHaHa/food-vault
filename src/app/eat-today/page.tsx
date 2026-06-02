@@ -41,7 +41,7 @@ export default function EatTodayPage() {
           <div className="mt-3 flex justify-center gap-2">
             {recommendation.store.rating && (
               <span className="text-xs bg-white text-black px-2 py-1 rounded-full">
-                评分 {recommendation.store.rating.toFixed(1)}
+                评分 {recommendation.store.rating?.toFixed(1) || '-'}
               </span>
             )}
             <span className="text-xs bg-gray-700 px-2 py-1 rounded-full">

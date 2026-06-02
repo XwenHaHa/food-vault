@@ -21,7 +21,8 @@ export function Badge({ children, variant = 'default', className = '' }: BadgePr
   );
 }
 
-export function RatingBadge({ rating }: { rating: number }) {
+export function RatingBadge({ rating }: { rating?: number | null }) {
+  if (rating == null) return <Badge>-</Badge>;
   const variant = rating >= 4.5 ? 'success' : rating >= 4.0 ? 'warning' : 'default';
   return <Badge variant={variant}>{rating.toFixed(1)}</Badge>;
 }
