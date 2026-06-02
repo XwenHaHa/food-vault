@@ -2,10 +2,14 @@
 
 import { useState, useEffect } from 'react';
 import { MapPin, Sparkles } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import { useStores } from '@/hooks/useStores';
+import { useAppStore } from '@/store';
 import { FilterChips } from '@/components/filter-chips';
 import { BottomNav } from '@/components/ui/bottom-nav';
+import { MapView } from '@/components/map-view';
 import { calculateDistance, formatDistance } from '@/utils/distance';
+import { getRecommendation } from '@/services/ai-service';
 import type { Store } from '@/types';
 
 const FILTER_OPTIONS = [
@@ -17,6 +21,7 @@ const FILTER_OPTIONS = [
 
 export default function NearbyPage() {
   const { stores } = useStores();
+  const router = useRouter();
   const [filter, setFilter] = useState('all');
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
 
@@ -29,9 +34,11 @@ export default function NearbyPage() {
     }
   }, []);
 
-  // Calculate distances and filter
-  const nearbyStores = stores
-    .filter((s) => s.latitude && s.longitude)
+  // Stores with location data
+  const storesWithLocation = stores.filter((s) => s.latitude && s.longitude);
+
+  // Calculate distances
+  const nearbyStores = storesWithLocation
     .map((s) => ({
       ...s,
       distance: userLocation
@@ -46,6 +53,22 @@ export default function NearbyPage() {
     if (filter === 'high-rating') return (s.rating || 0) >= 4.5;
     return s.category === filter;
   });
+
+  // Map markers
+  const markers = filteredStores.map((s) => ({
+    id: s.id,
+    name: s.name,
+    lat: s.latitude!,
+    lng: s.longitude!,
+  }));
+
+  const handleAISelect = async () => {
+    const candidates = filteredStores.length > 0 ? filteredStores : stores;
+    if (candidates.length === 0) return;
+    const rec = await getRecommendation(candidates, 'today');
+    useAppStore.setState({ recommendation: rec });
+    router.push('/eat-today');
+  };
 
   return (
     <>
@@ -65,17 +88,19 @@ export default function NearbyPage() {
           <span className="text-sm font-medium">AI 推荐结论</span>
         </div>
         <p className="text-sm text-gray-200">
-          {filteredStores.length > 0
-            ? `附近有 ${filteredStores.length} 家你收藏的店`
-            : '附近暂无收藏的店铺，试试扩大范围'}
+          {storesWithLocation.length > 0
+            ? filteredStores.length > 0
+              ? `附近有 ${filteredStores.length} 家你收藏的店`
+              : '当前筛选条件下没有匹配的店铺'
+            : `你有 ${stores.length} 家收藏，但还没有位置信息`}
         </p>
       </div>
 
-      {/* Map Placeholder */}
-      <div className="bg-gray-200 rounded-2xl h-40 mb-3 flex items-center justify-center">
-        <MapPin size={40} className="text-gray-500" />
-        <p className="text-xs text-gray-500 ml-2">地图加载中...</p>
-      </div>
+      {/* Map */}
+      <MapView
+        center={userLocation || undefined}
+        markers={markers}
+      />
 
       {/* Quick Filter */}
       <div className="mb-3">
@@ -102,17 +127,29 @@ export default function NearbyPage() {
               </button>
             </div>
           ))
+        ) : stores.length > 0 ? (
+          <div className="text-center py-4">
+            <p className="text-xs text-gray-400">
+              {storesWithLocation.length === 0
+                ? '收藏的店铺还没有位置信息'
+                : '附近没有匹配的店铺'}
+            </p>
+            <p className="text-[10px] text-gray-300 mt-1">
+              编辑店铺时添加经纬度即可在地图上显示
+            </p>
+          </div>
         ) : (
           <p className="text-xs text-gray-400 text-center py-4">
-            {stores.length === 0
-              ? '还没有收藏店铺'
-              : '附近没有匹配的店铺，试试其他筛选条件'}
+            还没有收藏店铺
           </p>
         )}
       </div>
 
       {/* Bottom CTA */}
-      <button className="bg-black text-white py-3 rounded-2xl text-sm mt-3 w-full">
+      <button
+        onClick={handleAISelect}
+        className="bg-black text-white py-3 rounded-2xl text-sm mt-3 w-full"
+      >
         AI 帮我选一个
       </button>
 
