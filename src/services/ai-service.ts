@@ -36,13 +36,18 @@ export async function getRecommendation(
       return getMockRecommendation(stores, type);
     }
 
-    const store = stores.find((s) => s.id === data.storeId) || stores[0];
+    const store = stores.find((s) => s.id === data.storeId);
 
-    return {
-      store,
-      reason: data.reason || '基于你的收藏偏好推荐',
-      confidence: 0.85,
-    };
+    // If AI returned a valid store, use it; otherwise fallback to random
+    if (store) {
+      return {
+        store,
+        reason: data.reason || '基于你的收藏偏好推荐',
+        confidence: 0.85,
+      };
+    }
+
+    return getMockRecommendation(stores, type);
   } catch {
     return getMockRecommendation(stores, type);
   }
@@ -51,14 +56,15 @@ export async function getRecommendation(
 function getMockRecommendation(stores: Store[], type: string): AIRecommendation {
   const unvisited = stores.filter((s) => s.status === 'wishlist');
   const candidates = unvisited.length > 0 ? unvisited : stores;
-  const sorted = [...candidates].sort((a, b) => (b.rating || 0) - (a.rating || 0));
-  const store = sorted[0];
+
+  // 随机选一个，每次点"换一个"都能换
+  const store = candidates[Math.floor(Math.random() * candidates.length)];
 
   const reasons: Record<string, string> = {
-    today: `基于你最近的收藏记录，${store.name}评分最高，值得一试！`,
-    delivery: `${store.name}适合外卖，评分${store.rating || '不错'}。`,
-    dinein: `${store.name}距离近、评分高，适合到店用餐。`,
-    city: `在${store.city}，${store.name}是你的首选。`,
+    today: `基于你最近的收藏记录，推荐你试试 ${store.name}！`,
+    delivery: `${store.name}适合外卖，${store.averageCost ? '人均' + store.averageCost + '元' : '值得试试'}。`,
+    dinein: `${store.name}值得一去，${store.note ? store.note.slice(0, 20) : '快去尝尝吧'}。`,
+    city: `在${store.city}，${store.name}值得一试。`,
   };
 
   return {

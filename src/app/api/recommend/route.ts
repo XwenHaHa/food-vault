@@ -12,18 +12,18 @@ export async function POST(request: NextRequest) {
     const modelName = model || process.env.OPENAI_MODEL || 'gpt-4o-mini';
 
     if (!key) {
-      // Return mock recommendation
-      const store = stores?.[0];
+      // Return random mock recommendation
+      const randomStore = stores?.[Math.floor(Math.random() * (stores?.length || 1))];
       return NextResponse.json({
-        storeId: store?.id,
-        reason: `基于你的收藏偏好，推荐 ${store?.name || '暂无'}`,
+        storeId: randomStore?.id,
+        reason: `基于你的收藏偏好，推荐你试试 ${randomStore?.name || '暂无'}`,
       });
     }
 
     const storeList = (stores || [])
       .map(
         (s: Record<string, unknown>) =>
-          `- ${s.name} (${s.category}, ${s.city}, 评分:${s.rating || '无'}, 状态:${s.status})`
+          `- [ID:${s.id}] ${s.name} (${s.category}, ${s.city}, 评分:${s.rating || '无'}, 状态:${s.status})`
       )
       .join('\n');
 
@@ -46,7 +46,7 @@ export async function POST(request: NextRequest) {
           {
             role: 'system',
             content:
-              '你是一个美食推荐助手。根据用户的收藏数据推荐餐厅。回复 JSON 格式：{"storeId": "xxx", "reason": "推荐理由"}',
+              '你是一个美食推荐助手。根据用户的收藏数据推荐餐厅。必须从列表中选一家，返回其 ID。每次推荐不同的店。回复 JSON 格式：{"storeId": "对应店铺的ID", "reason": "推荐理由"}',
           },
           {
             role: 'user',
@@ -62,9 +62,23 @@ export async function POST(request: NextRequest) {
     const content = data.choices?.[0]?.message?.content;
     const result = JSON.parse(content || '{}');
 
+    // Verify the returned storeId exists in the stores list
+    const matchedStore = (stores || []).find(
+      (s: Record<string, unknown>) => s.id === result.storeId
+    );
+
+    if (matchedStore) {
+      return NextResponse.json({
+        storeId: result.storeId,
+        reason: result.reason,
+      });
+    }
+
+    // Fallback: pick a random store
+    const randomStore = stores?.[Math.floor(Math.random() * (stores?.length || 1))];
     return NextResponse.json({
-      storeId: result.storeId,
-      reason: result.reason,
+      storeId: randomStore?.id,
+      reason: result.reason || `推荐你试试 ${randomStore?.name}`,
     });
   } catch (err) {
     return NextResponse.json({ error: (err as Error).message }, { status: 500 });

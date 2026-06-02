@@ -106,7 +106,7 @@ export const useAppStore = create<AppState>((set, get) => ({
 
   fetchRecommendation: async (type, city) => {
     const { stores } = get();
-    set({ recommendLoading: true });
+    set({ recommendLoading: true, recommendation: null });
     try {
       const rec = await getRecommendation(stores, type, city);
       set({ recommendation: rec, recommendLoading: false });
