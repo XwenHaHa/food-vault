@@ -69,11 +69,13 @@ export default function LoginPage() {
       if (user) {
         setUserId(user.id);
         router.push('/');
-      } else {
+      } else if (mode === 'signup') {
         // signUp returns null when email confirmation is required
         setMode('login');
-        setError('');
+        resetForm();
         alert('注册成功！请查看邮箱确认链接后再登录。');
+      } else {
+        setError('邮箱或密码错误');
       }
     } catch (err) {
       const msg = (err as Error).message || '操作失败';
