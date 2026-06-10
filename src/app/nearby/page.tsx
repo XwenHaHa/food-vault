@@ -57,7 +57,8 @@ export default function NearbyPage() {
 
   return (
     <div className="h-full flex flex-col bg-white">
-      <div className="flex-1 overflow-y-auto px-5 pt-5 pb-2 space-y-3">
+      {/* Fixed Header + Map + Filters */}
+      <div className="shrink-0 px-5 pt-5 pb-2 space-y-3">
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-xl font-bold tracking-tight">附近推荐</h1>
@@ -80,25 +81,26 @@ export default function NearbyPage() {
 
         <MapView center={userLocation || undefined} markers={markers} />
         <FilterChips options={FILTER_OPTIONS} selected={filter} onChange={setFilter} />
+      </div>
 
-        <div className="space-y-2">
-          {filteredStores.length > 0 ? filteredStores.map((store) => (
-            <div key={store.id} className="bg-gray-50 rounded-xl p-3.5 flex justify-between items-center">
-              <div>
-                <p className="text-sm font-medium">{store.name}</p>
-                <p className="text-xs text-gray-400 mt-0.5">
-                  {formatDistance(store.distance)} · {store.category} · 评分 {store.rating?.toFixed(1) || '无'}
-                </p>
-              </div>
-              <button className="text-xs bg-black text-white px-3 py-1.5 rounded-full">去吃</button>
+      {/* Scrollable Store List */}
+      <div className="flex-1 overflow-y-auto px-5 pb-2 space-y-2">
+        {filteredStores.length > 0 ? filteredStores.map((store) => (
+          <div key={store.id} className="bg-gray-50 rounded-xl p-3.5 flex justify-between items-center">
+            <div>
+              <p className="text-sm font-medium">{store.name}</p>
+              <p className="text-xs text-gray-400 mt-0.5">
+                {formatDistance(store.distance)} · {store.category} · 评分 {store.rating?.toFixed(1) || '无'}
+              </p>
             </div>
-          )) : (
-            <div className="text-center py-10">
-              <p className="text-gray-300 text-3xl mb-2">📍</p>
-              <p className="text-xs text-gray-400">{stores.length === 0 ? '还没有收藏店铺' : '附近没有匹配的店铺'}</p>
-            </div>
-          )}
-        </div>
+            <button className="text-xs bg-black text-white px-3 py-1.5 rounded-full">去吃</button>
+          </div>
+        )) : (
+          <div className="text-center py-10">
+            <p className="text-gray-300 text-3xl mb-2">📍</p>
+            <p className="text-xs text-gray-400">{stores.length === 0 ? '还没有收藏店铺' : '附近没有匹配的店铺'}</p>
+          </div>
+        )}
 
         <button onClick={handleAISelect} className="bg-black text-white py-3 rounded-2xl text-sm font-medium w-full active:scale-[0.98] transition-transform">
           AI 帮我选一个

@@ -16,7 +16,8 @@ export default function SettingsPage() {
 
   return (
     <div className="h-full flex flex-col bg-white">
-      <div className="flex-1 overflow-y-auto px-5 pt-5 pb-2 space-y-3">
+      {/* Fixed Header */}
+      <div className="shrink-0 px-5 pt-5 pb-2">
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-xl font-bold tracking-tight">设置</h1>
@@ -25,13 +26,17 @@ export default function SettingsPage() {
           <Settings size={20} className="text-gray-400" />
         </div>
 
-        <div className="bg-black text-white rounded-2xl p-4">
+        <div className="bg-black text-white rounded-2xl p-4 mt-3">
           <div className="flex items-center gap-2 mb-1">
             <Sparkles size={14} />
             <span className="text-sm font-medium">AI 偏好模式</span>
           </div>
           <p className="text-xs text-gray-300">当前：均衡推荐（口味 + 距离 + 评分）</p>
         </div>
+      </div>
+
+      {/* Scrollable Content */}
+      <div className="flex-1 overflow-y-auto px-5 pb-2 space-y-3">
 
         <Slider label="口味偏好权重" value={flavorWeight} onChange={setFlavorWeight} />
         <Slider label="距离优先级" value={distanceWeight} onChange={setDistanceWeight} />

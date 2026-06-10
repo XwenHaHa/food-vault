@@ -107,7 +107,8 @@ export default function EatTodayPage() {
 
   return (
     <div className="h-full flex flex-col bg-white">
-      <div className="flex-1 overflow-y-auto px-5 pt-5 pb-2">
+      {/* Fixed Header + Filters */}
+      <div className="shrink-0 px-5 pt-5 pb-2">
         {/* Header */}
         <div className="flex items-center justify-between mb-3">
           <div>
@@ -205,6 +206,10 @@ export default function EatTodayPage() {
             </span>
           </button>
         </div>
+      </div>
+
+      {/* Scrollable Content */}
+      <div className="flex-1 overflow-y-auto px-5 pb-2">
 
         {/* Empty state */}
         {filteredStores.length === 0 ? (

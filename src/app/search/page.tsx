@@ -27,7 +27,8 @@ export default function SearchPage() {
 
   return (
     <div className="h-full flex flex-col bg-white">
-      <div className="flex-1 overflow-y-auto px-5 pt-5 pb-2 space-y-3">
+      {/* Fixed Header + Filters */}
+      <div className="shrink-0 px-5 pt-5 pb-2 space-y-3">
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-xl font-bold tracking-tight">搜索</h1>
@@ -60,17 +61,18 @@ export default function SearchPage() {
             <FilterChips options={[{ label: '全部', value: '' }, ...CITIES.map((c) => ({ label: c, value: c }))]} selected={activeCity} onChange={(v) => { setActiveCity(v); updateFilter('city', v); executeSearch(); }} />
           </div>
         </div>
+      </div>
 
-        <div>
-          <p className="text-xs text-gray-400 mb-2">{searchTerm ? `搜索结果 (${displayResults.length})` : '全部店铺'}</p>
-          <div className="space-y-2">
-            {displayResults.length > 0 ? displayResults.map((s) => <StoreCard key={s.id} store={s} />) : (
-              <div className="text-center py-10">
-                <p className="text-gray-300 text-3xl mb-2">🔍</p>
-                <p className="text-xs text-gray-400">{searchTerm ? '没有找到匹配的店铺' : '还没有收藏任何店铺'}</p>
-              </div>
-            )}
-          </div>
+      {/* Scrollable Results */}
+      <div className="flex-1 overflow-y-auto px-5 pb-2">
+        <p className="text-xs text-gray-400 mb-2">{searchTerm ? `搜索结果 (${displayResults.length})` : '全部店铺'}</p>
+        <div className="space-y-2">
+          {displayResults.length > 0 ? displayResults.map((s) => <StoreCard key={s.id} store={s} />) : (
+            <div className="text-center py-10">
+              <p className="text-gray-300 text-3xl mb-2">🔍</p>
+              <p className="text-xs text-gray-400">{searchTerm ? '没有找到匹配的店铺' : '还没有收藏任何店铺'}</p>
+            </div>
+          )}
         </div>
       </div>
 

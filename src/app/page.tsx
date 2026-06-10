@@ -17,7 +17,8 @@ export default function DashboardPage() {
 
   return (
     <div className="h-full flex flex-col bg-white">
-      <div className="flex-1 overflow-y-auto px-5 pt-5 pb-2 space-y-4">
+      {/* Fixed Header Section */}
+      <div className="shrink-0 px-5 pt-5 pb-2 space-y-4">
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
@@ -65,25 +66,25 @@ export default function DashboardPage() {
             </button>
           </Link>
         </div>
+      </div>
 
-        {/* Recent List */}
-        <div>
-          <h2 className="text-sm font-semibold mb-3">最近新增</h2>
-          {loading ? (
-            <p className="text-xs text-gray-400 text-center py-6">加载中...</p>
-          ) : recentStores.length > 0 ? (
-            <div className="space-y-2">
-              {recentStores.map((store) => (
-                <StoreCard key={store.id} store={store} />
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-10">
-              <p className="text-gray-300 text-3xl mb-2">🍽️</p>
-              <p className="text-xs text-gray-400">还没有收藏，点击上方按钮添加</p>
-            </div>
-          )}
-        </div>
+      {/* Scrollable List */}
+      <div className="flex-1 overflow-y-auto px-5 pb-2">
+        <h2 className="text-sm font-semibold mb-3">最近新增</h2>
+        {loading ? (
+          <p className="text-xs text-gray-400 text-center py-6">加载中...</p>
+        ) : recentStores.length > 0 ? (
+          <div className="space-y-2">
+            {recentStores.map((store) => (
+              <StoreCard key={store.id} store={store} />
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-10">
+            <p className="text-gray-300 text-3xl mb-2">🍽️</p>
+            <p className="text-xs text-gray-400">还没有收藏，点击上方按钮添加</p>
+          </div>
+        )}
       </div>
 
       <BottomNav />

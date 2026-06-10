@@ -12,7 +12,8 @@ export default function StatsPage() {
 
   return (
     <div className="h-full flex flex-col bg-white">
-      <div className="flex-1 overflow-y-auto px-5 pt-5 pb-2 space-y-3">
+      {/* Fixed Header */}
+      <div className="shrink-0 px-5 pt-5 pb-2">
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-xl font-bold tracking-tight">美食画像</h1>
@@ -21,7 +22,7 @@ export default function StatsPage() {
           <BarChart3 size={20} className="text-gray-400" />
         </div>
 
-        <div className="bg-black text-white rounded-2xl p-4">
+        <div className="bg-black text-white rounded-2xl p-4 mt-3">
           <div className="flex items-center gap-2 mb-1">
             <Sparkles size={14} />
             <span className="text-sm font-medium">AI 画像总结</span>
@@ -30,6 +31,10 @@ export default function StatsPage() {
             {topCategory ? `你是"${topCategory.category}爱好者"，占比 ${topCategory.percentage}%` : '还没有足够的数据来生成画像'}
           </p>
         </div>
+      </div>
+
+      {/* Scrollable Content */}
+      <div className="flex-1 overflow-y-auto px-5 pb-2 space-y-3">
 
         <div className="bg-gray-50 rounded-2xl p-4">
           <p className="text-xs text-gray-400 mb-3">分类分布</p>

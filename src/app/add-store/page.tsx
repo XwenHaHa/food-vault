@@ -61,8 +61,8 @@ export default function AddStorePage() {
 
   return (
     <div className="h-full flex flex-col bg-white">
-      <div className="flex-1 overflow-y-auto px-5 pt-5 pb-2">
-        {/* Header */}
+      {/* Fixed Header + Quick Input */}
+      <div className="shrink-0 px-5 pt-5 pb-2">
         <div className="flex items-center justify-between mb-4">
           <div>
             <h1 className="text-lg font-semibold">新增店铺</h1>
@@ -73,8 +73,7 @@ export default function AddStorePage() {
           </button>
         </div>
 
-        {/* Quick Input */}
-        <div className="bg-black text-white rounded-2xl p-4 mb-4">
+        <div className="bg-black text-white rounded-2xl p-4">
           <div className="flex items-center gap-2 mb-2">
             <Zap size={16} />
             <span className="text-sm font-medium">极速输入</span>
@@ -88,7 +87,10 @@ export default function AddStorePage() {
           />
           <p className="text-xs text-gray-400 mt-2">支持自然语言快速解析</p>
         </div>
+      </div>
 
+      {/* Scrollable Form */}
+      <div className="flex-1 overflow-y-auto px-5 pb-2">
         {/* Structured Form */}
         <div className="space-y-3 flex-1 overflow-y-auto">
           <div>
