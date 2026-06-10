@@ -10,7 +10,6 @@ import { BottomNav } from '@/components/ui/bottom-nav';
 import { MapView } from '@/components/map-view';
 import { calculateDistance, formatDistance } from '@/utils/distance';
 import { getRecommendation } from '@/services/ai-service';
-import type { Store } from '@/types';
 
 const FILTER_OPTIONS = [
   { label: '全部', value: 'all' },
@@ -34,17 +33,9 @@ export default function NearbyPage() {
     }
   }, []);
 
-  // Stores with location data
   const storesWithLocation = stores.filter((s) => s.latitude && s.longitude);
-
-  // Calculate distances
   const nearbyStores = storesWithLocation
-    .map((s) => ({
-      ...s,
-      distance: userLocation
-        ? calculateDistance(userLocation.lat, userLocation.lng, s.latitude!, s.longitude!)
-        : 0,
-    }))
+    .map((s) => ({ ...s, distance: userLocation ? calculateDistance(userLocation.lat, userLocation.lng, s.latitude!, s.longitude!) : 0 }))
     .sort((a, b) => a.distance - b.distance);
 
   const filteredStores = nearbyStores.filter((s) => {
@@ -54,13 +45,7 @@ export default function NearbyPage() {
     return s.category === filter;
   });
 
-  // Map markers
-  const markers = filteredStores.map((s) => ({
-    id: s.id,
-    name: s.name,
-    lat: s.latitude!,
-    lng: s.longitude!,
-  }));
+  const markers = filteredStores.map((s) => ({ id: s.id, name: s.name, lat: s.latitude!, lng: s.longitude! }));
 
   const handleAISelect = async () => {
     const candidates = filteredStores.length > 0 ? filteredStores : stores;
@@ -71,89 +56,56 @@ export default function NearbyPage() {
   };
 
   return (
-    <>
-      {/* Header */}
-      <div className="flex items-center justify-between mb-3">
-        <div>
-          <h1 className="text-lg font-semibold">附近推荐</h1>
-          <p className="text-xs text-gray-400">基于你的收藏 & 当前位置</p>
+    <div className="h-full flex flex-col bg-white">
+      <div className="flex-1 overflow-y-auto px-5 pt-5 pb-2 space-y-3">
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-xl font-bold tracking-tight">附近推荐</h1>
+            <p className="text-xs text-gray-400">基于你的收藏 & 当前位置</p>
+          </div>
+          <MapPin size={20} className="text-gray-400" />
         </div>
-        <MapPin size={24} className="text-gray-600" />
-      </div>
 
-      {/* AI Summary */}
-      <div className="bg-black text-white rounded-2xl p-4 mb-3">
-        <div className="flex items-center gap-2 mb-1">
-          <Sparkles size={14} />
-          <span className="text-sm font-medium">AI 推荐结论</span>
+        <div className="bg-black text-white rounded-2xl p-4">
+          <div className="flex items-center gap-2 mb-1">
+            <Sparkles size={14} />
+            <span className="text-sm font-medium">AI 推荐结论</span>
+          </div>
+          <p className="text-sm text-gray-200">
+            {storesWithLocation.length > 0
+              ? filteredStores.length > 0 ? `附近有 ${filteredStores.length} 家你收藏的店` : '当前筛选条件下没有匹配的店铺'
+              : `你有 ${stores.length} 家收藏，但还没有位置信息`}
+          </p>
         </div>
-        <p className="text-sm text-gray-200">
-          {storesWithLocation.length > 0
-            ? filteredStores.length > 0
-              ? `附近有 ${filteredStores.length} 家你收藏的店`
-              : '当前筛选条件下没有匹配的店铺'
-            : `你有 ${stores.length} 家收藏，但还没有位置信息`}
-        </p>
-      </div>
 
-      {/* Map */}
-      <MapView
-        center={userLocation || undefined}
-        markers={markers}
-      />
-
-      {/* Quick Filter */}
-      <div className="mb-3">
+        <MapView center={userLocation || undefined} markers={markers} />
         <FilterChips options={FILTER_OPTIONS} selected={filter} onChange={setFilter} />
-      </div>
 
-      {/* List */}
-      <div className="flex-1 overflow-hidden space-y-2">
-        {filteredStores.length > 0 ? (
-          filteredStores.map((store) => (
-            <div
-              key={store.id}
-              className="bg-gray-50 rounded-xl p-3 flex justify-between items-center"
-            >
+        <div className="space-y-2">
+          {filteredStores.length > 0 ? filteredStores.map((store) => (
+            <div key={store.id} className="bg-gray-50 rounded-xl p-3.5 flex justify-between items-center">
               <div>
                 <p className="text-sm font-medium">{store.name}</p>
-                <p className="text-xs text-gray-400">
-                  {formatDistance(store.distance)} · {store.category} · 评分{' '}
-                  {store.rating?.toFixed(1) || '无'}
+                <p className="text-xs text-gray-400 mt-0.5">
+                  {formatDistance(store.distance)} · {store.category} · 评分 {store.rating?.toFixed(1) || '无'}
                 </p>
               </div>
-              <button className="text-xs bg-black text-white px-3 py-1 rounded-full">
-                去吃
-              </button>
+              <button className="text-xs bg-black text-white px-3 py-1.5 rounded-full">去吃</button>
             </div>
-          ))
-        ) : stores.length > 0 ? (
-          <div className="text-center py-4">
-            <p className="text-xs text-gray-400">
-              {storesWithLocation.length === 0
-                ? '收藏的店铺还没有位置信息'
-                : '附近没有匹配的店铺'}
-            </p>
-            <p className="text-[10px] text-gray-300 mt-1">
-              编辑店铺时添加经纬度即可在地图上显示
-            </p>
-          </div>
-        ) : (
-          <p className="text-xs text-gray-400 text-center py-4">
-            还没有收藏店铺
-          </p>
-        )}
+          )) : (
+            <div className="text-center py-10">
+              <p className="text-gray-300 text-3xl mb-2">📍</p>
+              <p className="text-xs text-gray-400">{stores.length === 0 ? '还没有收藏店铺' : '附近没有匹配的店铺'}</p>
+            </div>
+          )}
+        </div>
+
+        <button onClick={handleAISelect} className="bg-black text-white py-3 rounded-2xl text-sm font-medium w-full active:scale-[0.98] transition-transform">
+          AI 帮我选一个
+        </button>
       </div>
 
-      {/* Bottom CTA */}
-      <button
-        onClick={handleAISelect}
-        className="bg-black text-white py-3 rounded-2xl text-sm mt-3 w-full"
-      >
-        AI 帮我选一个
-      </button>
-
       <BottomNav />
-    </>
+    </div>
   );
 }

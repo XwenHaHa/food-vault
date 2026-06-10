@@ -13,7 +13,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
-  themeColor: '#000000',
+  themeColor: '#ffffff',
 };
 
 export default function RootLayout({
@@ -23,12 +23,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh-CN" className="h-full">
-      <body className="min-h-full bg-gray-100 flex items-center justify-center">
-        <AuthProvider>
-          <div className="w-[360px] h-[720px] bg-white rounded-[40px] shadow-xl p-5 flex flex-col overflow-hidden">
+      <body className="h-full bg-[#f5f5f7]">
+        <div className="h-full max-w-[430px] mx-auto
+          md:rounded-[28px] md:shadow-2xl md:h-[92vh] md:my-[4vh] md:border md:border-gray-100 md:overflow-hidden">
+          <AuthProvider>
             {children}
-          </div>
-        </AuthProvider>
+          </AuthProvider>
+        </div>
       </body>
     </html>
   );

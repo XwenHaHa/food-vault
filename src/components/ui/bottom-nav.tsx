@@ -16,22 +16,26 @@ export function BottomNav() {
   const pathname = usePathname();
 
   return (
-    <nav className="flex justify-between items-center pt-3 border-t">
-      {navItems.map(({ href, icon: Icon, label }) => {
-        const isActive = pathname === href;
-        return (
-          <Link
-            key={href}
-            href={href}
-            className={`flex flex-col items-center gap-0.5 ${
-              isActive ? 'text-black' : 'text-gray-400'
-            }`}
-          >
-            <Icon size={18} />
-            <span className="text-[9px]">{label}</span>
-          </Link>
-        );
-      })}
+    <nav className="shrink-0 border-t border-gray-100 bg-white/80 backdrop-blur-lg safe-bottom">
+      <div className="flex justify-around items-center py-2">
+        {navItems.map(({ href, icon: Icon, label }) => {
+          const isActive = pathname === href;
+          return (
+            <Link
+              key={href}
+              href={href}
+              className={`flex flex-col items-center gap-0.5 px-3 py-1 rounded-xl transition-all ${
+                isActive
+                  ? 'text-black scale-105'
+                  : 'text-gray-400 active:scale-95'
+              }`}
+            >
+              <Icon size={20} strokeWidth={isActive ? 2.2 : 1.8} />
+              <span className={`text-[10px] ${isActive ? 'font-medium' : ''}`}>{label}</span>
+            </Link>
+          );
+        })}
+      </div>
     </nav>
   );
 }
